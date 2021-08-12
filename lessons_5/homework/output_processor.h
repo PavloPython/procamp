@@ -4,7 +4,6 @@
 #include "types.h"
 
 
-void output(TABLE_RAW_S *table_raw);
 void output_homework(TABLE_HOME_S *table_raw);
 
 

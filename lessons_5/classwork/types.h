@@ -13,14 +13,4 @@ typedef struct
 }TABLE_RAW_S;
 
 
-typedef char CountryCode[3];
-
-typedef struct
-{
-    myString    Country;
-    CountryCode AlphaCode;
-    int         Numeric;
-    
-}TABLE_HOME_S;
-
 #endif
