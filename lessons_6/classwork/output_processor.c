@@ -18,9 +18,6 @@ void OP_Init(DATA_TYPE_E heading_type){
 
 }
 
-void OP_output_homework(TABLE_HOME_S * table_raw){
-    printf("%-35s %11s %11i\n", table_raw->Country, table_raw->AlphaCode, table_raw->Numeric);
-}
 
 void OP_output(TABLE_ROW_U * table_raw){
     if (table_raw->DataType == CPU_DATA_TYPE)

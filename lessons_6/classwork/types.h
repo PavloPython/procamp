@@ -45,15 +45,4 @@ typedef struct types
 }TABLE_ROW_U;
 
 
-typedef char CountryCode[3];
-
-
-typedef struct
-{
-    myString    Country;
-    CountryCode AlphaCode;
-    int         Numeric;
-    
-}TABLE_HOME_S;
-
 #endif

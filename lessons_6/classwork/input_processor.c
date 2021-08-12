@@ -35,8 +35,3 @@ void IP_input(TABLE_ROW_U * table_raw){
 #endif
     
 }
-
-
-void IP_input_homework(TABLE_HOME_S * table_raw){
-    scanf("%s %s %i", table_raw->Country, table_raw->AlphaCode, &table_raw->Numeric);    
-}
