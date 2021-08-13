@@ -20,16 +20,23 @@ void OP_Init(DATA_TYPE_E heading_type){
 }
 
 
-void OP_output(TABLE_ROW_U * table_raw){
-    if (table_raw->DataType == CPU_DATA_TYPE)
+void OP_output(TABLE_ROW_U * table_raw)
+{
+    switch (table_raw->DataType)
     {
-        printf("%-31s %8i %11.2f\n", table_raw->Data.cpu.CpuName, table_raw->Data.cpu.CpuMark, table_raw->Data.cpu.Price);
-    } 
-    else if (table_raw->DataType == ORDER_DATA_TYPE)
-    {
-        printf("%3i %31s %4i, %11.2f, %11.2f\n", table_raw->Data.order.OrderNumber, table_raw->Data.order.CpuName, table_raw->Data.order.Number, table_raw->Data.order.Price, table_raw->Data.order.TotalPrice);
-    }
-    else{
-        printf("Error: incorrect type\n");
-    }
+        case CPU_DATA_TYPE:
+        {
+            printf("%-31s %8i %11.2f\n", table_raw->Data.cpu.CpuName, table_raw->Data.cpu.CpuMark, table_raw->Data.cpu.Price);
+            break;
+        }
+        case ORDER_DATA_TYPE:
+        {
+            printf("%3i %31s %4i, %11.2f, %11.2f\n", table_raw->Data.order.OrderNumber, table_raw->Data.order.CpuName, table_raw->Data.order.Number, table_raw->Data.order.Price, table_raw->Data.order.TotalPrice);
+            break;
+        }
+        default:
+        {
+            printf("Error: incorrect type\n");
+        }
+    }    
 }

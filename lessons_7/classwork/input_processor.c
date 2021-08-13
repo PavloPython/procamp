@@ -2,8 +2,12 @@
 #include "input_processor.h"
 // #define TABLE_TYPE 1
 
-void IP_Init(void)
+static INPUT_PROCESSOR_FP InputCallBack;
+
+void IP_Init(INPUT_PROCESSOR_FP callback)
 {
+    InputCallBack = callback;
+
 #if TABLE_TYPE == 1
     printf("Please enter the following data:\n");
     printf("---------------------------------------------------------\n");
@@ -21,11 +25,17 @@ void IP_Init(void)
 }
 
 
-void IP_input(TABLE_ROW_U * table_raw){
+void IP_input(){
 
 #if TABLE_TYPE == 1
-    table_raw->DataType = CPU_DATA_TYPE;
-    scanf("%s %i %f", table_raw->Data.cpu.CpuName, &table_raw->Data.cpu.CpuMark, &table_raw->Data.cpu.Price);
+    myString    CpuName;
+    int         CpuMark;
+    float       Price;
+
+    // table_raw->DataType = CPU_DATA_TYPE;
+    scanf("%s %i %f", CpuName, &CpuMark, &Price);
+    InputCallBack(CPU_DATA_TYPE, CpuName, CpuMark, Price);
+
 #endif
 
 #if TABLE_TYPE == 2
