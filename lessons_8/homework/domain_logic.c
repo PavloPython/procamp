@@ -1,54 +1,37 @@
 #include <stdio.h>
 #include <string.h>
+
 #include "domain_logic.h"
 #include "output_processor.h"
 #include "input_processor.h"
 
-TABLE_ROW_U table[3];
+char buffer[1024];
 
-static void dl_WriteData(DATA_TYPE_E DataType, myString CountryName, CountryTwoCode AlphaCodeTwo, int Numeric);
+static void dl_WriteData(char* pData, unsigned int sizeOfData);
 
 
 void HomeTable(void)
 {
+    unsigned int i = 0;
 
-    TABLE_ROW_U *pTableRaw = 0;
-
-    // header
     IP_Init(dl_WriteData);
 
-    for (pTableRaw = &table[0]; pTableRaw <= &table[2]; pTableRaw++)
-    {
-        IP_input();
-    }
+    IP_input();
 
-    OP_Init(table[0].DataType);
+    OP_Init(buffer);
 
-    // body
-    for (pTableRaw = &table[0]; pTableRaw <= &table[2]; pTableRaw++)
-    {
-        OP_output(pTableRaw);
-    }
-    
+    OP_output(buffer);
+
     // footer
     printf("---------------------------------------------------------\n");
 }
 
 
-static void dl_WriteData(DATA_TYPE_E DataType, myString CountryName, CountryTwoCode AlphaCodeTwo, int Numeric)
+static void dl_WriteData(char* pData, unsigned int sizeOfData)
 {
     static int i = 0;
 
-    switch (DataType)
-    {
-        case COUNTRY_TWO_DATA_TYPE:
-        {
-            table[i].DataType = DataType;
-            memcpy(&table[i].Data.two.CountryName, CountryName, sizeof(myString));
-            memcpy(&table[i].Data.two.AlphaCodeTwo, AlphaCodeTwo, sizeof(CountryTwoCode));
-            table[i].Data.two.Numeric = Numeric;            
-            break;
-        }
-    }
+    memcpy(&buffer[sizeOfData * i], pData, sizeOfData);
+
     i++;
 }

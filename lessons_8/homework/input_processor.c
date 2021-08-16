@@ -1,5 +1,10 @@
 #include <stdio.h>
+#include <string.h>
+
 #include "input_processor.h"
+#include "types.h"
+
+#define TABLE_TYPE 1
 
 static INPUT_PROCESSOR_FP InputCallBack;
 
@@ -23,23 +28,35 @@ void IP_Init(INPUT_PROCESSOR_FP callback)
 }
 
 
-void IP_input(){
+void IP_input()
+{
+    TABLE_ROW_U tableRow;
+    unsigned int i = 0;
+    for (i = 0; i <= 2; i++)
+    {
 
 #if TABLE_TYPE == 1
-    myString       CountryName;
-    CountryTwoCode AlphaCodeTwo;
-    int            Numeric;
 
-    // table_raw->DataType = COUNTRY_TWO_DATA_TYPE;
-    scanf("%s %s %i", CountryName, AlphaCodeTwo, &Numeric);
 
-    InputCallBack(COUNTRY_TWO_DATA_TYPE, CountryName, AlphaCodeTwo, Numeric);
+        memset(&tableRow, 0, sizeof(TABLE_ROW_U));
+
+        tableRow.DataType = COUNTRY_TWO_DATA_TYPE;
+
+        scanf("%s %s %i", &tableRow.Data.two.CountryName,
+            &tableRow.Data.two.AlphaCodeTwo,
+            &tableRow.Data.two.Numeric);
+
+        InputCallBack((char*)&tableRow, sizeof(TABLE_ROW_U));
 
 #endif
 
 #if TABLE_TYPE == 2
-    table_raw->DataType = COUNTRY_THREE_DATA_TYPE;
-    scanf("%s %s %s %i", table_raw->Data.three.CountryName, table_raw->Data.three.AlphaCodeTwo, table_raw->Data.three.AlphaCodeThree, &table_raw->Data.three.Numeric);
+        tableRow.DataType = COUNTRY_THREE_DATA_TYPE;
+
+        scanf("%s %s %s %i", &tableRow.Data.three.CountryName,
+            &tableRow.Data.three.AlphaCodeTwo,
+            &tableRow.Data.three.AlphaCodeThree,
+            &tableRow.Data.three.Numeric);
 #endif
-    
+    }
 }

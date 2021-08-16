@@ -3,8 +3,8 @@
 
 #include "types.h"
 
-void OP_Init(DATA_TYPE_E heading_type);
-void OP_output(TABLE_ROW_U *table_raw);
+void OP_Init(char* buffer);
+void OP_output(char *buffer);
 
 
 #endif
