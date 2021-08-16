@@ -23,10 +23,15 @@ void OP_Init(){
 
 void OP_output(char *buffer)
 {
-    TABLE_ROW_U *pTableRow = (TABLE_ROW_U*)buffer;
+    TABLE_ROW_U *pTableRow = 0;
+    unsigned int i = 0;
 
-    switch (pTableRow->DataType)
+    for (i = 0; i <= 2; i++)
     {
+        pTableRow = (TABLE_ROW_U*)buffer + i;
+
+        switch (pTableRow->DataType)
+        {
         case CPU_DATA_TYPE:
         {
             printf("%-31s %8i %11.2f\n", pTableRow->Data.cpu.CpuName, pTableRow->Data.cpu.CpuMark, pTableRow->Data.cpu.Price);
@@ -41,5 +46,6 @@ void OP_output(char *buffer)
         {
             printf("Error: incorrect type\n");
         }
-    }    
+        }
+    }
 }

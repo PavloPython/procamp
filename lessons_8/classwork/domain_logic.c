@@ -16,17 +16,11 @@ void CreateTable(void)
 
     IP_Init(dl_WriteData);
 
-    for (i = 0; i <= 2; i++)
-    {
-        IP_input();
-    }
+    IP_input();
 
     OP_Init();
 
-    for (i = 0; i <= 2; i++)
-    {
-        OP_output(buffer);
-    }
+    OP_output(buffer);
     
     // footer
     printf("---------------------------------------------------------\n");
@@ -37,7 +31,7 @@ static void dl_WriteData(char* pData, unsigned int sizeOfData)
 {
     static int i = 0;
 
-    memcpy(buffer[sizeOfData*i], pData, sizeOfData);
+    memcpy(&buffer[sizeOfData * i], pData, sizeOfData);
     
     i++;
 }
